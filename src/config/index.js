@@ -2,6 +2,7 @@ import firebase from 'firebase/app';
 
 //import 'firebase/firestore';
 
+
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 // TODO: Add SDKs for Firebase products that you want to use
@@ -17,6 +18,7 @@ const firebaseConfig = {
   messagingSenderId: "765419539227",
   appId: "1:765419539227:web:1610982f6422ba5bf2e1be"
 };
+
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
