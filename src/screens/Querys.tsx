@@ -1,9 +1,39 @@
  import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
 import db from '../config';
-import { collection, doc, setDoc, getDocs, where, query, limit, getDoc, deleteDoc } from "firebase/firestore"; 
+import { collection, doc, setDoc, getDocs, where, query, limit, getDoc, deleteDoc, onSnapshot } from "firebase/firestore"; 
+import { useEffect, useState } from 'react';
+
 
 const Querys = () => {
+
+    const [ usuarios, setUsuarios ] = useState<any[]>([]);
+
+    useEffect(() => {
+        pegaDados();
+
+    }, []);
+
+    const pegaDados = async () => {
+        const q = query(collection(db, "users"));
+
+        
+        const unsubscribe = onSnapshot(q, (querySnapshot) => {
+            const users:any[] = [];
+            querySnapshot.forEach((doc) => {
+                users.push(doc.data());
+            });
+            console.log(users);
+            //console.log(users);
+            //console.log('piiiiii');
+            setUsuarios(users);
+        });
+        
+    }
+
+    const addUserRealTime = () => {
+
+    }
 
     const antCloneDelete = () => {
         // Crie uma referência ao documento que você deseja remover
@@ -36,15 +66,15 @@ const Querys = () => {
         const userRef = collection(db, "users");
 
         await setDoc(doc(userRef, "Rere"), {
-            name: "Raissa", 
-            state: "Claudio",
+            name: "Isabela", 
+            state: "Bh",
             country: "EUA",
         });
 
     }
 
     const teste2 = async () => {
-    const querySnapshot = await getDocs(collection(db, "users"));
+        const querySnapshot = await getDocs(collection(db, "users"));
         querySnapshot.forEach((doc) => {
             // doc.data() is never undefined for query doc snapshots
             console.log(doc.id, " => ", doc.data());
@@ -85,6 +115,18 @@ const Querys = () => {
             <TouchableOpacity onPress={() => antCloneDelete()}>
                 <Text>Deleta</Text>
             </TouchableOpacity>
+
+            <Text>________________________________________________</Text>
+
+            <TouchableOpacity onPress={() => addUserRealTime()}>
+                <Text>Adiciona novo</Text>
+            </TouchableOpacity>
+
+            {usuarios.map((item, index)=>(
+                <View key={index}>
+                    <Text>{item.name}</Text>
+                </View>
+            ))}
 
         </View>
     );

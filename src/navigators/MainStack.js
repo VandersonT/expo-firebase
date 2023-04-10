@@ -10,8 +10,8 @@ const MainStack = createNativeStackNavigator();
 
 export default () => (
     <MainStack.Navigator>
-        <MainStack.Screen name="SignIn" component={SignIn} />
         <MainStack.Screen name="Querys" component={Querys} />
+        <MainStack.Screen name="SignIn" component={SignIn} />
         <MainStack.Screen name="Home" component={Home} />
     </MainStack.Navigator>
 );
