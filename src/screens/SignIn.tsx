@@ -17,20 +17,19 @@ const SignIn = ({ navigation }: any) => {
 
     useEffect(()=>{
         const auth = getAuth();
-        onAuthStateChanged(auth, (user) => {
+        const unsubscribe = onAuthStateChanged(auth, (user) => {
         if (user) {
-            // User is signed in, see docs for a list of available properties
-            // https://firebase.google.com/docs/reference/js/firebase.User
-            const uid = user.uid;
-            // ...
-            console.log('logado');
+            console.log('Usuário logado [login nega acesso]');
+            // usuário está logado, redireciona para a página Home
             navigation.push('Home');
         } else {
-            // User is signed out
-            // ...
-            console.log('nao logado ent fica aq em login');
+            console.log('Usuário não está logado [login aceita acesso]');
+            // usuário não está logado, mantém na tela de login
         }
         });
+
+        // quando a tela for desmontada, remove o ouvinte
+        return unsubscribe;
     }, []);
     
 
@@ -87,6 +86,10 @@ const SignIn = ({ navigation }: any) => {
         }
     }
 
+    const teste = () => {
+        navigation.push('Home');
+    }
+
     return (
         <View style={styles.container}>
 
@@ -115,6 +118,10 @@ const SignIn = ({ navigation }: any) => {
                     </TouchableOpacity>
                 </View>
             }
+
+            <TouchableOpacity onPress={teste}>
+                <Text>Ir home à força</Text>
+            </TouchableOpacity>
         </View>
     );
 }

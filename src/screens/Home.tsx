@@ -6,22 +6,19 @@ const Home = ({ navigation }: any) => {
 
     useEffect(()=>{
         const auth = getAuth();
-        onAuthStateChanged(auth, (user) => {
+        const unsubscribe = onAuthStateChanged(auth, (user) => {
         if (user) {
-            // User is signed in, see docs for a list of available properties
-            // https://firebase.google.com/docs/reference/js/firebase.User
-            const uid = user.uid;
-            // ...
-            console.log('logado ent fica aqui na home');
+            console.log('Usuário logado[Home aceita acesso]');
         } else {
-            // User is signed out
-            // ...
-            console.log('nao logado');
-            navigation.push('SignIn');
+            console.log('Usuário não está logado [Home nega acesso]');
+            navigation.navigate('SignIn');
+            // usuário não está logado, manda pra login
         }
         });
-    }, [])
-    
+
+        // quando a tela for desmontada, remove o ouvinte
+        return unsubscribe;
+    }, []);
 
     const logOut = () => {
 
@@ -32,7 +29,11 @@ const Home = ({ navigation }: any) => {
         // An error happened.
         });
 
-        //navigation.push('SignIn');
+        navigation.push('SignIn');
+    }
+
+    const teste = () => {
+        navigation.push('SignIn');
     }
 
     return (
@@ -41,6 +42,10 @@ const Home = ({ navigation }: any) => {
 
             <TouchableOpacity onPress={logOut}>
                 <Text>Sair</Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity onPress={teste}>
+                <Text>Ir para login à força</Text>
             </TouchableOpacity>
         </View>
     )
