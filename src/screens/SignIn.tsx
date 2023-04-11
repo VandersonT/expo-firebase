@@ -15,7 +15,7 @@ const SignIn = ({ navigation }: any) => {
     const [ idader, setIdader ] = useState(12);
     const [ isLogin, setIsLogin ] = useState(true);
 
-    useEffect(()=>{
+    /*useEffect(()=>{
         const auth = getAuth();
         const unsubscribe = onAuthStateChanged(auth, (user) => {
         if (user) {
@@ -30,7 +30,7 @@ const SignIn = ({ navigation }: any) => {
 
         // quando a tela for desmontada, remove o ouvinte
         return unsubscribe;
-    }, []);
+    }, []);*/
     
 
     const loginHadler = () => {
@@ -118,10 +118,7 @@ const SignIn = ({ navigation }: any) => {
                     </TouchableOpacity>
                 </View>
             }
-
-            <TouchableOpacity onPress={teste}>
-                <Text>Ir home à força</Text>
-            </TouchableOpacity>
+            
         </View>
     );
 }

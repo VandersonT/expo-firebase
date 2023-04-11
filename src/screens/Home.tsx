@@ -4,7 +4,7 @@ import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
 
 const Home = ({ navigation }: any) => {
 
-    useEffect(()=>{
+    /*useEffect(()=>{
         const auth = getAuth();
         const unsubscribe = onAuthStateChanged(auth, (user) => {
         if (user) {
@@ -18,7 +18,7 @@ const Home = ({ navigation }: any) => {
 
         // quando a tela for desmontada, remove o ouvinte
         return unsubscribe;
-    }, []);
+    }, []);*/
 
     const logOut = () => {
 
@@ -42,10 +42,6 @@ const Home = ({ navigation }: any) => {
 
             <TouchableOpacity onPress={logOut}>
                 <Text>Sair</Text>
-            </TouchableOpacity>
-
-            <TouchableOpacity onPress={teste}>
-                <Text>Ir para login à força</Text>
             </TouchableOpacity>
         </View>
     )

@@ -9,7 +9,7 @@ const Querys = () => {
 
     const [ usuarios, setUsuarios ] = useState<any[]>([]);
 
-    useEffect(() => {
+    /*useEffect(() => {
         pegaDados();
 
     }, []);
@@ -29,7 +29,7 @@ const Querys = () => {
             setUsuarios(users);
         });
         
-    }
+    }*/
 
     const addUserRealTime = () => {
 
